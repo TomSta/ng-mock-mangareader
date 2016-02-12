@@ -200,11 +200,6 @@ describe("Chapter reader", function () {
     $location.search('chapter', '1');
   }) );
 
-  it("should redirect to chapter url when readChapter function called", function () {
-    $controller('ChapterController', {$scope: $scope, $location: $location, mangaApi: mangaApi});
-      expect($location.url()).toBe('/chapter?manga=ghost-in-the-shell-arise&chapter=1');
-  });
-
   it('should not do nothing if manga or chapter vars are empty', function() {
     spyOn(mangaApi, 'read').and.callFake(function() {
       var deferred = $q.defer();
@@ -214,9 +209,9 @@ describe("Chapter reader", function () {
     
     $controller('ChapterController', {$scope: $scope, $location: $location, mangaApi: mangaApi});
     $rootScope.$apply();
-    expect($scope.chaptersData.pages[0].pageId).toBe(1);
-    expect($scope.chaptersData.pages[1].pageId).toBe(2);
-    expect($scope.chaptersData.pages[2].pageId).toBe(3);
+    expect($scope.chapterData.pages[0].pageId).toBe(1);
+    expect($scope.chapterData.pages[1].pageId).toBe(2);
+    expect($scope.chapterData.pages[2].pageId).toBe(3);
 
   });
 

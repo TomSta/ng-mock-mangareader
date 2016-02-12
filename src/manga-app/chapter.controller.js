@@ -4,34 +4,52 @@ app.controller('ChapterController', ChapterController);
 
 
 function ChapterController ($scope, $location, mangaApi, $timeout) {
-      var xwow = new WOW;
-      $scope.chaptersData = {};
-      var mangaId = $location.search().manga;
-      var chapterNumber = $location.search().chapter;
-      $scope.nextChapter = parseInt(chapterNumber) + 1;
+      var xwow = new WOW; //unhappily needs to be reinitialized
+      
+      $scope.chapterData = {};
+      
+      $scope.gotChapter = false; //show info if user request non existing chapter
+      $scope.dataLoaded = false; //needed to keep out flickering/late animations
+
+      /* assign variables to scope for reuse in template */
+      $scope.chapter = $location.search().chapter; 
       $scope.mangaId = $location.search().manga;
-      $scope.nextPage = function(){
-       var next = parseInt(chapterNumber) + 1;
-       $location.url('/chapter?manga='+mangaId+'&chapter='+next);
+      
+      $scope.changeChapter = function(chapterNumber){
+       $location.url('/chapter?manga='+$scope.mangaId+'&chapter='+chapterNumber);
       };
 
-      $scope.dataLoaded = true;
-      $scope.showPageNumbers = false;
-      if(mangaId.length > 1 && chapterNumber > 0) {
-      
-       mangaApi.read(mangaId, chapterNumber)
+      if($scope.mangaId.length > 1 && $scope.chapter > 0) {
+       mangaApi.read($scope.mangaId, $scope.chapter)
         .then(function(data) {
-            $scope.chaptersData = data;
-        })
-        .then(function(data){
-         $timeout(function(){
-          xwow.init();
-          $scope.showMeta = true;
-         }, 100);
+          checkMangaData(data);
+          showMangaData();
         })
         .catch(function(){
             $scope.status = 'Error!';
         });
-       $location.url('/chapter?manga='+mangaId+'&chapter='+chapterNumber);
       }
+
+    /*
+     * if object is empty show no more chapters box
+     */
+    function checkMangaData(data) {
+      if(data.hasOwnProperty('href')) {
+        $scope.gotChapter = true;
+        $scope.chapterData = data;
+      } else {
+       $scope.gotChapter = false; 
+      }
+    }
+
+    /*
+     * init WowJS scroller and show data
+     * needs to go in timeout : (
+     */
+    function showMangaData() {
+      $timeout(function(){
+        xwow.init();
+        $scope.dataLoaded = true;
+      }, 100);
+    }
 }

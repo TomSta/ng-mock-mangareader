@@ -1,20 +1,17 @@
-<!--<div ng-repeat='page in chaptersData.pages' class="wow slideInLeft">
-      <img class='img-responsive' ng-src="{{page.url}}">
-</div>-->
-g       
-<a ng-click="nextPage()">next page</a>
-<a target="_self" href='/#/chapter?manga={{mangaId}}&chapter={{nextChapter}}'>Next One</a>
-
 <div ng-show='dataLoaded'>
-  <div ng-repeat='page in chaptersData.pages' class='wow animated slideInUp' >
-    <div class='row' ng-show='showMeta'>
+  <div ng-hide='gotChapter' class='well text-center'>
+    <h2>Sorry, that was last chapter available! :(</h2>
+    <p ng-click='changeChapter(1*chapter-1)' class='lead'>Click here to <u>go back to previous one!</u></p>
+    <p ng-click='changeChapter(1)' class='lead'>or here to <u>go to first one!</u></p>
+  </div>
+  <div ng-repeat='page in chapterData.pages' class='wow animated slideInUp' >
+    <div class='row'>
       <div class='col-xs-6 text-left'>
-          <span class="label label-info text-left">Page {{$index}} of {{chaptersData.pages.length}} </span>
+          <span class="label label-info text-left">Page {{$index}} of {{chapterData.pages.length}} </span>
       </div>
       <div class="col-xs-6 text-right">
-          <span class="label label-info">Previous chapter</span>
-          <span class="label label-info">Chapters index</span>
-          <span class="label label-info">Next chapter</span>
+          <span class="label label-info" ng-click='changeChapter(1*chapter-1)'>Previous chapter</span>
+          <span class="label label-info" ng-click='changeChapter(1*chapter+1)'>Next chapter</span>
       </div>
     </div>
     <div class="row">
