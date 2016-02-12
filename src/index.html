@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html ng-app="mangaApp">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Manga App</title>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+
+<style type="text/css">
+.container { max-width: 900px; }
+.fader.ng-enter {
+-webkit-animation: zoomInUp 1s;
+animation: zoomInUp 1s;
+}
+
+.fader.ng-enter-stagger {
+-webkit-animation-delay:50ms;
+animation-delay:50ms;
+
+/* override to make sure it's not inherited from other styles */
+-webkit-animation-duration:0;
+animation-duration:0;
+}
+
+/** bootstrap overrides, should be recompiled from less files **/
+.well {
+background-color: #434323;
+}
+
+body {
+background: url('./images/Untitled.jpg') no-repeat;
+background-color: black;
+background-position: 0px 70px; 
+background-attachment: fixed;
+}
+ 
+.wow {
+   visibility: hidden;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Manga Reader App</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <button class="btn btn-info navbar-btn" data-toggle="modal" data-target="#techsUsed">Technologies Used</button>
+          <button class="btn btn-info navbar-btn" data-toggle="modal" data-target="#why">Why</button>
+        </li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="header">
+  <div class="container">
+    <div ng-controller="SearchController" class='well'>
+      <p class="lead">All the manga you CAN read!</p>
+      <form class="form-inline-lg" ng-submit="search()">
+        <div class="input-group">
+          <input class="form-control" type="text" 
+                 placeholder="Manga title" ng-model="query"
+                 ng-keyup="keyup()"
+                 ng-keydown="keydown()"
+                 >
+          <span class="input-group-btn">
+            <button class="btn btn-info" type="button" ng-click="search()">Go!</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div ng-view=""></div>
+</div>
+
+
+<div class="footer">
+  <div class="container">
+    <p></p>
+  </div>
+</div>
+
+<!-- Modal: Technologies Used -->
+<div id="techsUsed" class="modal animated bounceInLeft" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Techs used...</h4>
+      </div>
+      <div class="modal-body">
+        Front:
+        <ul>
+          <li>Bootstrap/Angular UI Bootstrap</li>
+          <li>AngularJS 1.5</li>
+          <li>Animate.CSS</li>
+          <li>HTML? :)</li>
+        </ul>
+        Development:
+        <ul>
+          <li>Karma, Jasmine & NgMocks for testing</li>
+          <li>Grunt with BrowserSync</li>
+        </ul>
+        Data comes from:
+        <ul>
+          <li>via MashApe's[.]Com:</li>
+          <li>MangaScraper API</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Why -->
+<div id="why" class="modal animated bounceInLeft" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Techs used...</h4>
+      </div>
+      <div class="modal-body">
+        Because:
+        <ul>
+          <li>I wanted to practice using NgMocks</li>
+          <li>and a bit of tdd aproach</li>
+          <li>and it's an API play</li>
+          <li>Ghost In The Shell & don't ask why</li>
+          <li>It might be time for a break so why don't you read something new?</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="./bower_components/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="./bower_components/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./bower_components/wow/dist/wow.min.js"></script>
+
+
+<!--my scripts -->
+<script type="text/javascript" src="./mangascraper/service.js"></script>
+<script type="text/javascript" src="./manga-core/service.js"></script>
+<script type="text/javascript" src="./manga-app/app.js"></script>
+<script type="text/javascript" src="./manga-app/search.controller.js"></script>
+<script type="text/javascript" src="./manga-app/results.controller.js"></script>
+<script type="text/javascript" src="./manga-app/home.controller.js"></script>
+<script type="text/javascript" src="./manga-app/manga-result.directive.js"></script>
+<script type="text/javascript" src="./manga-app/chapter.controller.js"></script>
+
+</body>
+</html>
