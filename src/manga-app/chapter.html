@@ -1,8 +1,14 @@
 <div ng-show='dataLoaded'>
   <div ng-hide='gotChapter' class='well text-center'>
-    <h2>Sorry, that was last chapter available! :(</h2>
-    <p ng-click='changeChapter(1*chapter-1)' class='lead'>Click here to <u>go back to previous one!</u></p>
-    <p ng-click='changeChapter(1)' class='lead'>or here to <u>go to first one!</u></p>
+    <h2>Sorry, that was the last chapter available! :(</h2>
+    <button ng-click='changeChapter(1*chapter-1)' 
+            class='btn btn-info btn-block'>
+              Go back to previous one!
+    </button>
+    <button ng-click='changeChapter(1)' 
+            class='btn btn-info btn-block'>
+              Check the first one again? if it was that good!
+    </button>
   </div>
   <div ng-repeat='page in chapterData.pages' class='wow animated slideInUp' >
     <div class='row'>
@@ -10,7 +16,7 @@
           <span class="label label-info text-left">Page {{$index}} of {{chapterData.pages.length}} </span>
       </div>
       <div class="col-xs-6 text-right">
-          <span class="label label-info" ng-click='changeChapter(1*chapter-1)'>Previous chapter</span>
+          <span ng-show='chapter > 1' class="label label-info" ng-click='changeChapter(1*chapter-1)'>Previous chapter</span>
           <span class="label label-info" ng-click='changeChapter(1*chapter+1)'>Next chapter</span>
       </div>
     </div>
