@@ -55,12 +55,20 @@ module.exports = function(grunt) {
           'src/bower_components/angular-animate/angular-animate.min.js',
           'src/bower_components/jquery/dist/jquery.min.js',
           'src/bower_components/bootstrap/dist/js/bootstrap.min.js',
-          'src/bower_components/wow/dist/wow.min.js'
+          'src/bower_components/wow/dist/wow.min.js',
+          'src/annotated/mangascraper/service.min.js',
+          'src/annotated/manga-core/service.min.js',
+          'src/annotated/manga-app/app.min.js',
+          'src/annotated/manga-app/search.controller.min.js',
+          'src/annotated/manga-app/results.controller.min.js',
+          'src/annotated/manga-app/home.controller.min.js',
+          'src/annotated/manga-app/manga-result.directive.min.js',
+          'src/annotated/manga-app/chapter.controller.min.js',
         ],
         dest: 'src/built.js',
       },
     },
   });
 
-  grunt.registerTask('default', ['browserSync']);
+  grunt.registerTask('default', ['ngAnnotate', 'uglify', 'concat,' 'browserSync']);
 };
