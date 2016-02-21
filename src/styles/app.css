@@ -1,0 +1,36 @@
+.container { max-width: 900px; }
+.fader.ng-enter {
+  -webkit-animation: zoomInUp 1s;
+  animation: zoomInUp 1s;
+}
+
+.fader.ng-enter-stagger {
+  -webkit-animation-delay:50ms;
+  animation-delay:50ms;
+
+  /* override to make sure it's not inherited from other styles */
+  -webkit-animation-duration:0;
+  animation-duration:0;
+}
+
+/* bootstrap overrides, should be recompiled from less files */
+.well {
+  background-color: #434323;
+}
+
+body {
+  background: url('./images/Untitled.jpg') no-repeat;
+  background-color: black;
+  background-position: 0px 70px;
+  background-attachment: fixed;
+}
+
+.wow {
+   visibility: hidden;
+}
+
+@media (max-width: 1500px) {
+  .container {
+    margin-top: 200px;
+  }
+}

@@ -6,7 +6,6 @@ module.exports = function(grunt) {
     browserSync: {
       bsFiles: {
         src: ['src/**/*.html', 'src/**/*.js'],
-
       },
       options: {
         server: {
@@ -15,7 +14,7 @@ module.exports = function(grunt) {
       }
     },
     ngAnnotate: {
-       framewrok: {
+       js: {
            files: {
              'src/annotated/mangascraper/service.js': ['src/mangascraper/service.js'],
              'src/annotated/manga-core/service.js': ['src/manga-core/service.js'],
@@ -29,7 +28,7 @@ module.exports = function(grunt) {
        },
     },
     uglify: {
-      framework: {
+      js: {
         files: {
           'src/annotated/mangascraper/service.min.js': ['src/annotated/mangascraper/service.js'],
           'src/annotated/manga-core/service.min.js': ['src/annotated/manga-core/service.js'],
@@ -46,7 +45,7 @@ module.exports = function(grunt) {
       options: {
         separator: ';\n',
       },
-      dist: {
+      js: {
         src: [
           'src/bower_components/angular/angular.min.js',
           'src/bower_components/angular-route/angular-route.min.js',
@@ -67,8 +66,23 @@ module.exports = function(grunt) {
         ],
         dest: 'src/built.js',
       },
+      css: {
+        options: {
+          expand: true,
+          flatten: true,
+          cwd: 'somedir/',
+          separator: '\n',
+        },
+        src: [
+          'src/bower_components/bootstrap/dist/css/bootstrap.min.css',
+          'bower_components/font-awesome/css/font-awesome.min.css',
+          'bower_components/animate.css/animate.min.css',
+          'src/styles/app.css',
+        ],
+        dest: 'src/built.css',
+      },
     },
   });
 
-  grunt.registerTask('default', ['ngAnnotate', 'uglify', 'concat,' 'browserSync']);
+  grunt.registerTask('default', ['ngAnnotate', 'uglify', 'concat', 'browserSync']);
 };
