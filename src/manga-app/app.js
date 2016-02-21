@@ -17,13 +17,4 @@ angular.module('mangaApp', ['ngRoute', 'mangascraper', 'ui.bootstrap', 'mangaCor
       redirectTo: '/'
       });
 
-})
-.run(function($rootScope){
-
-      $rootScope.$on('$routeChangeSuccess', function(next, current){
-        //new WOW().init();
-        //wow.sync();
-        console.log('location changed');
-      });
-
 });

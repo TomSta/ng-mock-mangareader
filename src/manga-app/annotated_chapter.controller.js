@@ -1,4 +1,5 @@
-var app = angular.module('mangaApp');
+
+ChapterController.$inject = ["$scope", "$location", "mangaApi", "$timeout"];var app = angular.module('mangaApp');
 
 app.controller('ChapterController', ChapterController);
 
