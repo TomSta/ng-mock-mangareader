@@ -4,9 +4,9 @@
     <li><a ng-href="#/">Home</a></li>
     <li>Results</li>
   </ol>
-
-  <uib-accordion>
-    <uib-accordion-group class='fader' ng-repeat="result in results" 
+  <div ng-hide="resultsLoaded" class='text-center'><i class="fa fa-spinner fa-spin" style="font-size:22px"></i></div>
+  <uib-accordion ng-show="resultsLoaded">
+    <uib-accordion-group class='fader' ng-repeat="result in results"
       is-open="result.open"
       ng-click="expand($index, result.mangaId)">
       <uib-accordion-heading>
